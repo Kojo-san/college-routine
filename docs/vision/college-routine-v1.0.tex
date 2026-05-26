@@ -1,0 +1,1036 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{pdflscape}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+}
+
+\newcommand{\missingfigure}[1]{%
+    \fbox{%
+        \parbox[c][0.25\textheight][c]{0.85\linewidth}{%
+            \centering Image manquante : \texttt{#1}%
+        }%
+    }%
+}
+
+\setstretch{1.2}
+
+\title{
+    \Huge \textbf{College Routine} \\
+    \vspace{0.5cm}
+    
+}
+
+\author{Gamaliel Kalefe}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% =========================================================
+\section{Introduction}
+
+Le projet \textbf{College Routine} est une plateforme intelligente de gestion de performance humaine destinée principalement aux étudiants universitaires.
+
+L’objectif du système est d’optimiser simultanément :
+\begin{itemize}
+    \item la réussite académique;
+    \item la santé physique;
+    \item la récupération;
+    \item la gestion du stress;
+    \item l’organisation quotidienne;
+    \item le développement d’habitudes durables.
+\end{itemize}
+
+Le système agit comme un assistant intelligent capable de générer des recommandations personnalisées et des planifications dynamiques basées sur :
+\begin{itemize}
+    \item les horaires de cours;
+    \item les plans de cours;
+    \item les échéances académiques;
+    \item les objectifs de l’utilisateur;
+    \item les données physiologiques provenant d’Apple Health;
+    \item les habitudes de vie;
+    \item des recherches scientifiques en neurosciences, productivité, sommeil et apprentissage.
+\end{itemize}
+
+% =========================================================
+\section{Problématique}
+
+Les étudiants universitaires doivent constamment équilibrer :
+\begin{itemize}
+    \item les cours;
+    \item les examens;
+    \item les projets;
+    \item les activités physiques;
+    \item le sommeil;
+    \item les responsabilités personnelles;
+    \item la santé mentale.
+\end{itemize}
+
+Les outils traditionnels tels que les calendriers et applications de tâches ne tiennent généralement pas compte :
+\begin{itemize}
+    \item du niveau de fatigue;
+    \item du sommeil;
+    \item de la récupération;
+    \item de la charge cognitive;
+    \item des méthodes d’étude optimales;
+    \item ou de l’état psychologique de l’utilisateur.
+\end{itemize}
+
+Le projet vise donc à créer un système intelligent capable de transformer les données personnelles, académiques et physiologiques en recommandations concrètes et adaptatives.
+
+% =========================================================
+\section{Vision générale du produit}
+
+Le système doit fonctionner comme un plannificateur capable de :
+\begin{itemize}
+    \item comprendre l’état physique et mental de l’utilisateur;
+    \item analyser sa charge académique;
+    \item détecter les risques de surcharge ou de procrastination;
+    \item recommander des méthodes d’étude adaptées;
+    \item optimiser les périodes de concentration;
+    \item ajuster les entraînements physiques;
+    \item générer automatiquement un horaire quotidien intelligent.
+\end{itemize}
+
+Le système doit être :
+\begin{itemize}
+    \item adaptatif;
+    \item explicable;
+    \item fondé scientifiquement;
+    \item flexible;
+    \item personnalisé.
+\end{itemize}
+
+% =========================================================
+\section{Objectifs du système}
+
+\subsection{Réussite académique}
+
+Le système doit permettre à l’utilisateur de :
+\begin{itemize}
+    \item maximiser ses performances académiques;
+    \item améliorer sa compréhension profonde des matières;
+    \item réduire la procrastination;
+    \item optimiser ses méthodes d’étude;
+    \item planifier efficacement ses révisions;
+    \item maintenir un haut niveau de concentration;
+    \item atteindre un objectif GPA défini.
+\end{itemize}
+
+\subsection{Santé et récupération}
+
+Le système doit permettre à l’utilisateur de :
+\begin{itemize}
+    \item améliorer la qualité du sommeil;
+    \item éviter la fatigue chronique;
+    \item maintenir un bon équilibre de vie;
+    \item réduire le stress académique;
+    \item détecter les périodes de surcharge mentale.
+\end{itemize}
+
+\subsection{Performance physique}
+
+Le système doit permettre à l’utilisateur de :
+\begin{itemize}
+    \item atteindre des objectifs physiques précis;
+    \item optimiser les entraînements;
+    \item adapter les séances selon la récupération;
+    \item intégrer efficacement le sport dans l’horaire académique.
+\end{itemize}
+
+% =========================================================
+\section{Public cible}
+
+Le système est principalement destiné :
+\begin{itemize}
+    \item aux étudiants universitaires;
+    \item aux utilisateurs cherchant à optimiser leur performance cognitive;
+    \item aux utilisateurs souhaitant équilibrer études, santé et activités physiques.
+    \item aux utilisateurs intéressés par le quantified self.
+\end{itemize}
+
+% =========================================================
+\section{Principes scientifiques et pédagogiques}
+
+Le système s’appuie sur :
+\begin{itemize}
+    \item des recherches scientifiques;
+    \item des conférences universitaires;
+    \item des ateliers pédagogiques;
+    \item des études sur l’apprentissage humain.
+\end{itemize}
+
+Les domaines utilisés incluent :
+\begin{itemize}
+    \item neurosciences;
+    \item psychologie cognitive;
+    \item science du sommeil;
+    \item gestion du temps;
+    \item gestion du stress;
+    \item productivité;
+    \item science de l’apprentissage;
+    \item récupération physique;
+    \item méthodes d’étude.
+\end{itemize}
+
+% =========================================================
+\section{Principes fondamentaux du système}
+
+\subsection{Objectifs clairs}
+
+Le système doit encourager l’utilisateur à définir :
+\begin{itemize}
+    \item des objectifs réalistes;
+    \item quantifiables;
+    \item limités dans le temps;
+    \item cohérents entre eux.
+\end{itemize}
+
+\subsection{Priorisation intelligente}
+
+Le système doit utiliser une logique inspirée de la matrice d’Eisenhower afin de distinguer :
+\begin{itemize}
+    \item les tâches urgentes;
+    \item les tâches importantes;
+    \item les tâches secondaires;
+    \item les tâches reportables.
+\end{itemize}
+
+\subsection{Planification multiniveau}
+
+Le système doit permettre :
+\begin{itemize}
+    \item une planification trimestrielle;
+    \item une planification hebdomadaire;
+    \item une planification quotidienne.
+\end{itemize}
+
+Le système doit conserver une certaine flexibilité afin d’adapter le planning aux imprévus et à l’état de l’utilisateur.
+
+% =========================================================
+\section{Modules principaux du système}
+
+% ---------------------------------------------------------
+\subsection{Tableau de bord principal}
+
+Le tableau de bord principal doit afficher :
+\begin{itemize}
+    \item le planning quotidien;
+    \item les tâches prioritaires;
+    \item les cours;
+    \item les séances d’étude;
+    \item les séances gym;
+    \item le niveau d’énergie;
+    \item les métriques de sommeil;
+    \item le niveau de récupération;
+    \item les recommandations principales du système.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsection{Gestion académique}
+
+Le système doit permettre :
+\begin{itemize}
+    \item l’importation des plans de cours;
+    \item l’analyse automatique des échéances;
+    \item la détection des périodes critiques;
+    \item l’estimation de charge de travail;
+    \item la planification des révisions;
+    \item le suivi de progression académique.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsection{Plannification de sessions d'étude}
+
+Le système doit intégrer des sessions d’étude intelligentes similaires à des séances d’entraînement physique.
+
+Chaque session peut inclure :
+\begin{itemize}
+    \item un objectif;
+    \item une durée;
+    \item une intensité cognitive;
+    \item une méthode d’étude recommandée;
+    \item des pauses;
+    \item un résultat attendu.
+\end{itemize}
+
+\subsubsection{Types de sessions possibles}
+
+\begin{itemize}
+    \item active recall;
+    \item résolution d’exercices;
+    \item lecture active;
+    \item deep work;
+    \item révision rapide;
+    \item création de mind maps;
+    \item préparation d’examens.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsection{Plannification de sessions d’entraînement physique}
+
+Le système doit intégrer des séances physiques adaptées :
+\begin{itemize}
+    \item aux objectifs physiques;
+    \item au niveau de récupération;
+    \item à la charge académique;
+    \item à l’énergie disponible.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsection{Moteur de santé et de récupératio}
+
+Le système doit utiliser les données provenant de :
+\begin{itemize}
+    \item Apple Health;
+    \item Zepp;
+    \item d’autres sources compatibles.
+\end{itemize}
+
+Les données utilisées peuvent inclure :
+\begin{itemize}
+    \item sommeil;
+    \item fréquence cardiaque;
+    \item activité physique;
+    \item calories;
+    \item récupération;
+    \item niveau d’activité.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsection{Système de recommandations intelligentes}
+
+Le système doit générer des recommandations personnalisées basées sur :
+\begin{itemize}
+    \item les données physiologiques;
+    \item la charge académique;
+    \item les objectifs;
+    \item les habitudes;
+    \item les recherches scientifiques utilisées.
+\end{itemize}
+
+\subsubsection{Exemples de recommandations}
+
+\begin{itemize}
+    \item déplacer une séance de deep work;
+    \item réduire l’intensité d’un entraînement;
+    \item recommander une pause;
+    \item recommander une méthode d’étude;
+    \item prévenir une surcharge;
+    \item ajuster les horaires de sommeil.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsection{Système anti-procrastination}
+
+Le système doit détecter les causes potentielles de procrastination :
+\begin{itemize}
+    \item indécision;
+    \item ennui;
+    \item fatigue;
+    \item complexité;
+    \item manque de motivation.
+\end{itemize}
+
+Le système peut alors :
+\begin{itemize}
+    \item segmenter automatiquement les tâches;
+    \item réduire la taille des objectifs;
+    \item proposer une méthode Pomodoro;
+    \item recommander une pause.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsection{Système de gestion du stress}
+
+Le système doit intégrer :
+\begin{itemize}
+    \item des recommandations de gestion du stress;
+    \item des conseils de préparation aux examens;
+    \item des stratégies de récupération mentale;
+    \item des recommandations de pauses.
+\end{itemize}
+
+% =========================================================
+\section{Modèle énergétique}
+
+Le système doit distinguer :
+
+\subsection{Énergie physique}
+
+Influencée par :
+\begin{itemize}
+    \item le sommeil;
+    \item les entraînements;
+    \item l’activité physique;
+    \item la récupération.
+\end{itemize}
+
+\subsection{Énergie cognitive}
+
+Influencée par :
+\begin{itemize}
+    \item la fatigue mentale;
+    \item la charge cognitive;
+    \item la concentration;
+    \item le stress;
+    \item la motivation.
+\end{itemize}
+
+% =========================================================
+\section{Données utilisées}
+
+Le système peut utiliser :
+\begin{itemize}
+    \item horaires de cours;
+    \item plans de cours;
+    \item échéanciers;
+    \item données Apple Health;
+    \item habitudes utilisateur;
+    \item tâches;
+    \item résultats académiques;
+    \item données de sommeil;
+    \item données d’activité physique;
+    \item sessions d’étude;
+    \item sessions gym.
+\end{itemize}
+
+% =========================================================
+\section{Architecture générale du système}
+
+Le système comprendra principalement :
+
+\subsection{Frontend Web}
+
+\begin{itemize}
+    \item tableau de bord principal;
+    \item visualisations;
+    \item plannification;
+    \item analytiques.
+\end{itemize}
+
+\subsection{Application iPhone}
+
+\begin{itemize}
+    \item synchronisation Apple Health;
+    \item récupération des données santé;
+    \item envoi des données au backend.
+\end{itemize}
+
+\subsection{Backend intelligent}
+
+\begin{itemize}
+    \item moteur de recommandations;
+    \item moteur de planification;
+    \item analyse de données;
+    \item stockage;
+    \item synchronisation temps réel.
+\end{itemize}
+
+% =========================================================
+\section{Contraintes et limites}
+
+Le système doit :
+\begin{itemize}
+    \item respecter la confidentialité des données santé;
+    \item permettre à l’utilisateur de contrôler ses données;
+    \item éviter les recommandations dangereuses;
+    \item éviter la surcharge excessive;
+    \item conserver une certaine flexibilité;
+    \item éviter la dépendance à une planification rigide.
+\end{itemize}
+
+% =========================================================
+\section{Vision future}
+
+Les futures versions pourront intégrer :
+\begin{itemize}
+    \item apprentissage automatique personnalisé;
+    \item prédiction de performance académique;
+    \item prédiction de fatigue;
+    \item détection avancée du burnout;
+    \item adaptation automatique des méthodes d’étude;
+    \item IA conversationnelle;
+    \item intégration calendrier avancée;
+    \item recommandations nutritionnelles;
+    \item visualisation des connaissances;
+    \item génération automatique de résumés et mind maps.
+\end{itemize}
+% =========================================================
+\section{Analyse et conception du système}
+
+% =========================================================
+\subsection{Nom du système}
+
+\textbf{College Routine} est une application intelligente qui aide l'utilisateur à organiser ses journées, ses cours, ses sessions d'étude, ses entraînements physiques, sa récupération et ses objectifs personnels.
+
+% =========================================================
+\subsection{Acteurs du système}
+
+\subsubsection{Acteur principal}
+
+L'acteur principal est l'\textbf{utilisateur étudiant}. Il s'agit de la personne qui utilise l'application pour organiser sa vie académique, physique et personnelle.
+
+\subsubsection{Acteurs secondaires}
+
+Les acteurs secondaires sont :
+
+\begin{itemize}
+    \item \textbf{Apple Health / Zepp} : fournit les données de santé, de sommeil, d'activité physique et de récupération;
+    \item \textbf{Google Calendar} : fournit ou reçoit les événements planifiés;
+    \item \textbf{Service IA} : participe à la génération des recommandations et à l'explication des décisions;
+    \item \textbf{Base scientifique} : contient les règles et sources scientifiques utilisées par le moteur de recommandations.
+\end{itemize}
+
+% =========================================================
+\subsection{Modèle conceptuel du domaine}
+
+Le modèle conceptuel représente les concepts importants du domaine sans imposer de choix d'implémentation. Il permet d'identifier les objets métiers, leurs attributs principaux et leurs relations.
+
+Le système repose sur un utilisateur qui possède des objectifs, suit des cours, importe des plans de cours, gère des échéances, planifie des tâches, réalise des sessions d'étude et des sessions fitness, puis reçoit des recommandations personnalisées.
+
+Le système utilise également des données de santé afin d'estimer un état cognitif et un score de récupération. Ces informations influencent la génération du planning quotidien.
+
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{model-conceptuel.jpeg}{%
+        \includegraphics[width=\linewidth]{model-conceptuel.jpeg}%
+    }{%
+        \missingfigure{model-conceptuel.jpeg}%
+    }
+    \caption{Modèle conceptuel - College Routine}
+    \label{fig:model-conceptuel}
+\end{figure}
+% =========================================================
+\subsection{Diagramme de cas d'utilisation}
+
+Le diagramme de cas d'utilisation présente les principales interactions entre les acteurs et le système.
+
+Les cas d'utilisation principaux sont :
+
+\begin{itemize}
+    \item configurer son profil;
+    \item définir ses objectifs;
+    \item importer un plan de cours;
+    \item gérer ses cours;
+    \item gérer ses échéances;
+    \item créer une session d'étude;
+    \item créer une session fitness;
+    \item synchroniser les données santé;
+    \item générer un planning quotidien;
+    \item recevoir des recommandations;
+    \item expliquer une recommandation;
+    \item suivre la progression académique;
+    \item suivre la progression physique.
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \IfFileExists{use-case.png}{%
+        \includegraphics[width=0.6\linewidth]{use-case.png}%
+    }{%
+        \missingfigure{use-case.png}%
+    }
+    \caption{Diagramme de cas d'utilisation - College Routine}
+    \label{fig:use-case}
+\end{figure}
+% =========================================================
+\subsection{Cas d'utilisation détaillés}
+
+\subsubsection{UC-01 : Générer un planning quotidien}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{0.28\linewidth}|p{0.62\linewidth}|}
+        \hline
+        Acteur principal & Utilisateur étudiant. \\ \hline
+        Acteurs secondaires & Apple Health / Zepp, Google Calendar, Service IA, Base scientifique. \\ \hline
+        Préconditions &
+        \begin{minipage}[t]{0.6\linewidth}
+            \begin{itemize}[leftmargin=*]
+                \item L'utilisateur possède un profil configuré.
+                \item L'utilisateur a défini au moins un objectif académique, physique ou personnel.
+                \item Le système possède au moins une source de tâches, cours ou échéances.
+            \end{itemize}
+        \end{minipage} \\ \hline
+    \end{tabular}
+    \caption{Cas d'utilisation UC-01}
+    \label{tab:uc-01}
+\end{table}
+
+
+
+\paragraph{Déclencheur}
+L'utilisateur demande la génération du planning de la journée.
+
+\paragraph{Scénario principal}
+\begin{enumerate}
+    \item L'utilisateur ouvre le dashboard.
+    \item Le système récupère les cours, tâches, échéances et contraintes du jour.
+    \item Le système synchronise les données santé disponibles.
+    \item Le système calcule l'état cognitif et le score de récupération.
+    \item Le système priorise les tâches selon leur urgence, leur importance et les objectifs.
+    \item Le système estime la charge académique du jour.
+    \item Le système sélectionne les sessions d'étude nécessaires.
+    \item Le système sélectionne ou ajuste les sessions fitness.
+    \item Le système génère les blocs de temps.
+    \item Le système ajoute les pauses, repas, périodes de récupération et sommeil.
+    \item Le système produit des recommandations explicables.
+    \item L'utilisateur consulte le planning.
+\end{enumerate}
+
+\paragraph{Postconditions}
+\begin{itemize}
+    \item Un planning quotidien est créé.
+    \item Les recommandations sont associées aux blocs de temps.
+    \item Le planning peut être modifié par l'utilisateur.
+\end{itemize}
+
+\paragraph{Exceptions}
+\begin{itemize}
+    \item Si les données santé ne sont pas disponibles, le système utilise les données déclarées manuellement ou les valeurs précédentes.
+    \item Si le planning est trop chargé, le système signale un risque de surcharge.
+    \item Si deux activités sont incompatibles, le système propose une alternative.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsubsection{UC-02 : Créer une session d'étude}
+
+\paragraph{Acteur principal}
+Utilisateur étudiant.
+
+\paragraph{Préconditions}
+L'utilisateur possède au moins un cours.
+
+\paragraph{Scénario principal}
+\begin{enumerate}
+    \item L'utilisateur sélectionne un cours.
+    \item Le système affiche les échéances et objectifs associés.
+    \item L'utilisateur choisit le type de session ou demande une recommandation.
+    \item Le système analyse la difficulté, l'urgence et l'état cognitif.
+    \item Le système recommande une méthode d'étude.
+    \item L'utilisateur confirme la session.
+    \item Le système ajoute la session au planning.
+\end{enumerate}
+
+\paragraph{Méthodes possibles}
+\begin{itemize}
+    \item active recall;
+    \item practice testing;
+    \item spaced repetition;
+    \item mind map;
+    \item lecture active;
+    \item exercices;
+    \item Pomodoro.
+\end{itemize}
+
+% ---------------------------------------------------------
+\subsubsection{UC-03 : Créer une session fitness}
+
+\paragraph{Acteur principal}
+Utilisateur étudiant.
+
+\paragraph{Préconditions}
+L'utilisateur possède un objectif physique.
+
+\paragraph{Scénario principal}
+\begin{enumerate}
+    \item L'utilisateur demande une séance gym.
+    \item Le système consulte les objectifs physiques.
+    \item Le système consulte le score de récupération.
+    \item Le système analyse la charge académique.
+    \item Le système propose une séance adaptée.
+    \item L'utilisateur confirme la séance.
+    \item Le système ajoute la séance au planning.
+\end{enumerate}
+
+\paragraph{Exceptions}
+Si la récupération est faible, le système recommande une séance légère ou une récupération active.
+
+% ---------------------------------------------------------
+\subsubsection{UC-04 : Recevoir une recommandation explicable}
+
+\paragraph{Acteur principal}
+Utilisateur étudiant.
+
+\paragraph{Scénario principal}
+\begin{enumerate}
+    \item Le système détecte une situation pertinente.
+    \item Le système applique les règles scientifiques.
+    \item Le système génère une recommandation.
+    \item Le système associe une explication claire à la recommandation.
+    \item L'utilisateur consulte la recommandation.
+    \item L'utilisateur peut accepter, ignorer ou modifier la recommandation.
+\end{enumerate}
+
+% =========================================================
+\subsection{Diagramme de séquence système}
+
+Le diagramme de séquence système présente les interactions entre l'acteur et le système, sans détailler les objets internes.
+
+\subsubsection{Code PlantUML du SSD : Générer un planning quotidien}
+
+\begin{verbatim}
+@startuml
+title SSD - Générer un planning quotidien - College Routine
+
+actor "Utilisateur étudiant" as User
+participant "Système College Routine" as System
+
+User -> System : ouvrirDashboard()
+System --> User : afficherRésuméJournee()
+
+User -> System : demanderGenerationPlanning(date)
+System -> System : récupérerCoursEtEcheances(date)
+System -> System : récupérerTaches(date)
+System -> System : synchroniserDonnéesSanté()
+System -> System : calculerEtatCognitif()
+System -> System : calculerScoreRecuperation()
+System -> System : prioriserActivites()
+System -> System : générerBlocsTemps()
+System -> System : générerRecommandations()
+System --> User : afficherPlanningQuotidien(planning, recommandations)
+
+User -> System : confirmerPlanning()
+System -> System : sauvegarderPlanning()
+System --> User : afficherConfirmation()
+
+@enduml
+\end{verbatim}
+
+% =========================================================
+\subsection{Diagrammes de séquence de conception}
+
+Les diagrammes de séquence de conception montrent comment les objets internes collaborent pour réaliser un cas d'utilisation.
+
+\subsubsection{Générer un planning quotidien}
+
+\begin{verbatim}
+@startuml
+title Diagramme de séquence - Générer un planning quotidien - College Routine
+
+actor "Utilisateur" as User
+boundary "DashboardView" as View
+control "PlanningFacade" as Facade
+control "AcademicService" as Academic
+control "HealthService" as Health
+control "PlanningEngine" as Planner
+control "RecommendationEngine" as Reco
+entity "PlanningContext" as Context
+entity "DailyPlan" as Plan
+
+User -> View : cliquerGenererPlanning(date)
+View -> Facade : generateDailyPlan(userId, date)
+
+Facade -> Academic : getAcademicData(userId, date)
+Academic --> Facade : courses, tasks, deadlines
+
+Facade -> Health : syncHealthData(userId)
+Health --> Facade : healthData, recoveryScore, cognitiveState
+
+Facade -> Context : create(user, courses, tasks, deadlines, healthData)
+Context --> Facade : context
+
+Facade -> Planner : generateDailyPlan(context)
+Planner -> Planner : prioritizeTasks()
+Planner -> Planner : allocateStudySessions()
+Planner -> Planner : allocateFitnessSessions()
+Planner -> Planner : insertBreaksAndRecovery()
+Planner --> Facade : dailyPlan
+
+Facade -> Reco : generateRecommendations(context, dailyPlan)
+Reco -> Reco : applyScientificRules()
+Reco -> Reco : generateExplanations()
+Reco --> Facade : recommendations
+
+Facade -> Plan : attachRecommendations(recommendations)
+Plan --> Facade : updatedPlan
+
+Facade --> View : dailyPlan
+View --> User : afficherPlanning(dailyPlan)
+
+@enduml
+\end{verbatim}
+
+% ---------------------------------------------------------
+\subsubsection{Créer une session d'étude}
+
+\begin{verbatim}
+@startuml
+title Diagramme de séquence - Créer une session d'étude - College Routine
+
+actor "Utilisateur" as User
+boundary "StudySessionView" as View
+control "PlanningFacade" as Facade
+control "AcademicService" as Academic
+control "HealthService" as Health
+control "RecommendationEngine" as Reco
+control "StudySessionFactory" as Factory
+entity "StudySession" as Session
+entity "Course" as Course
+
+User -> View : sélectionnerCours(courseId)
+View -> Facade : getCourseContext(courseId)
+
+Facade -> Academic : getCourse(courseId)
+Academic --> Facade : course
+
+Facade -> Health : getLatestCognitiveState(userId)
+Health --> Facade : cognitiveState
+
+Facade -> Reco : recommendStudyStrategy(course, cognitiveState)
+Reco --> Facade : studyStrategy
+
+Facade -> Factory : createStudySession(course, studyStrategy, cognitiveState)
+Factory --> Facade : studySession
+
+Facade --> View : afficherSessionProposée(studySession)
+User -> View : confirmerSession()
+View -> Facade : saveSession(studySession)
+Facade --> View : confirmation()
+
+@enduml
+\end{verbatim}
+
+% ---------------------------------------------------------
+\subsubsection{Adapter une session fitness}
+
+\begin{verbatim}
+@startuml
+title Diagramme de séquence - Adapter une séance fitness - College Routine
+
+actor "Utilisateur" as User
+boundary "FitnessView" as View
+control "PlanningFacade" as Facade
+control "HealthService" as Health
+control "FitnessService" as Fitness
+entity "RecoveryScore" as Recovery
+entity "FitnessSession" as Session
+
+User -> View : demanderSeanceFitness()
+View -> Facade : createFitnessSession(userId)
+
+Facade -> Health : getLatestRecoveryScore(userId)
+Health --> Facade : recoveryScore
+
+Facade -> Fitness : createFitnessSession(goal, recoveryScore)
+Fitness -> Fitness : choisirIntensité()
+Fitness -> Fitness : choisirTypeEntrainement()
+Fitness --> Facade : fitnessSession
+
+Facade --> View : afficherSeanceProposée(fitnessSession)
+
+alt récupération faible
+  View --> User : proposerSéanceLégèreOuRepos()
+else récupération normale
+  View --> User : proposerSéanceNormale()
+end
+
+@enduml
+\end{verbatim}
+
+% =========================================================
+\subsection{Assignation des responsabilités}
+
+L'assignation des responsabilités s'appuie sur les principes de faible couplage, forte cohésion et expert en information.
+
+\subsubsection{Contrôleur principal}
+
+La classe \texttt{PlanningFacade} agit comme contrôleur principal pour les cas d'utilisation liés au planning.
+
+Ses responsabilités sont :
+\begin{itemize}
+    \item recevoir les demandes provenant du dashboard;
+    \item orchestrer les services internes;
+    \item masquer la complexité du système;
+    \item retourner un planning complet à l'interface.
+\end{itemize}
+
+\subsubsection{Experts en information}
+
+Les classes suivantes sont des experts en information :
+
+\begin{itemize}
+    \item \texttt{Course};
+    \item \texttt{Deadline};
+    \item \texttt{Task};
+    \item \texttt{HealthData};
+    \item \texttt{RecoveryScore};
+    \item \texttt{CognitiveState};
+    \item \texttt{DailyPlan}.
+\end{itemize}
+
+Elles possèdent les informations nécessaires pour répondre aux questions du domaine.
+
+\subsubsection{Créateurs}
+
+La classe \texttt{PlanningEngine} est responsable de créer les objets \texttt{DailyPlan} et \texttt{TimeBlock}.
+
+Les fabriques spécialisées sont responsables de créer les différents types de sessions :
+
+\begin{itemize}
+    \item \texttt{StudySessionFactory};
+    \item \texttt{FitnessSessionFactory};
+    \item \texttt{RecoverySessionFactory}.
+\end{itemize}
+
+\subsubsection{Faible couplage}
+
+Le système sépare les responsabilités dans plusieurs services :
+
+\begin{itemize}
+    \item \texttt{AcademicService};
+    \item \texttt{HealthService};
+    \item \texttt{FitnessService};
+    \item \texttt{RecommendationEngine};
+    \item \texttt{PlanningEngine}.
+\end{itemize}
+
+Chaque service est responsable d'un domaine précis.
+
+\subsubsection{Forte cohésion}
+
+Chaque module du système possède une responsabilité claire :
+
+\begin{itemize}
+    \item le module académique gère les cours, plans de cours, tâches et échéances;
+    \item le module santé gère les données physiologiques;
+    \item le module planning gère l'horaire quotidien;
+    \item le module sessions gère les sessions d'étude, fitness et récupération;
+    \item le module recommandations gère les règles scientifiques et les suggestions personnalisées.
+\end{itemize}
+
+% =========================================================
+\subsection{Patrons de conception utilisés}
+
+\subsubsection{Patron Stratégie}
+
+Le patron Stratégie est utilisé pour représenter les différentes méthodes d'étude.
+
+Exemples :
+\begin{itemize}
+    \item \texttt{ActiveRecallStrategy};
+    \item \texttt{SpacedRepetitionStrategy};
+    \item \texttt{PracticeTestingStrategy};
+    \item \texttt{MindMapStrategy};
+    \item \texttt{PomodoroStrategy}.
+\end{itemize}
+
+Ce patron permet de changer dynamiquement la méthode d'étude recommandée selon le cours, la fatigue, l'urgence ou la proximité d'un examen.
+
+\subsubsection{Patron Façade}
+
+Le patron Façade est utilisé avec \texttt{PlanningFacade}. Cette classe offre un point d'entrée simple pour l'interface utilisateur tout en masquant la complexité des services internes.
+
+\subsubsection{Patron Fabrique}
+
+Le patron Fabrique est utilisé pour créer les différents types de sessions :
+
+\begin{itemize}
+    \item session d'étude;
+    \item session fitness;
+    \item session de récupération.
+\end{itemize}
+
+\subsubsection{Patron Observateur}
+
+Le patron Observateur peut être utilisé pour notifier automatiquement les vues lorsque le planning change.
+
+Exemples de vues observatrices :
+\begin{itemize}
+    \item \texttt{DashboardView};
+    \item \texttt{CalendarView};
+    \item \texttt{RecommendationView}.
+\end{itemize}
+
+\subsubsection{Patron Commande}
+
+Le patron Commande peut être utilisé pour rendre certaines actions annulables :
+
+\begin{itemize}
+    \item créer une tâche;
+    \item déplacer un bloc de temps;
+    \item générer un planning;
+    \item compléter une session.
+\end{itemize}
+
+% =========================================================
+\subsection{Diagramme d'activité}
+
+Le diagramme d'activité suivant décrit le processus général de génération du planning quotidien.
+
+\subsubsection{Code PlantUML du diagramme d'activité}
+
+\begin{verbatim}
+@startuml
+title Diagramme d'activité - Génération du planning quotidien - College Routine
+
+start
+
+:Charger profil utilisateur;
+:Charger objectifs;
+:Charger cours, tâches et échéances;
+:Synchroniser données santé;
+
+:Calculer score de récupération;
+:Calculer état cognitif;
+:Estimer charge académique;
+
+if (Surcharge détectée ?) then (oui)
+  :Réduire blocs non critiques;
+  :Ajouter pauses;
+  :Générer alerte de surcharge;
+else (non)
+  :Continuer planification normale;
+endif
+
+:Prioriser les tâches;
+:Choisir sessions d'étude;
+:Choisir session fitness;
+:Créer blocs de temps;
+:Ajouter repas, pauses et récupération;
+
+:Appliquer règles scientifiques;
+:Générer recommandations;
+:Afficher planning;
+
+stop
+
+@enduml
+\end{verbatim}
+
+% =========================================================
+\subsection{Diagramme de classes de conception}
+
+Le diagramme de classes de conception présente une première architecture logicielle de \textbf{College Routine}. Il regroupe les classes selon leurs responsabilités principales.
+
+\subsubsection{Code PlantUML du diagramme de classes}
+\begin{figure}
+    \centering
+    \IfFileExists{Ca.jpeg}{%
+        \includegraphics[width=0.5\linewidth]{Ca.jpeg}%
+    }{%
+        \missingfigure{Ca.jpeg}%
+    }
+    \caption{Diagramme de classes de conception}
+    \label{fig:classe-conception}
+\end{figure}
+
+\end{document}
