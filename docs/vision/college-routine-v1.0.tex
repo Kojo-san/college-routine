@@ -13,6 +13,8 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage{array}
 
 \hypersetup{
     colorlinks=true,
@@ -478,7 +480,7 @@ Les futures versions pourront intégrer :
 \section{Analyse et conception du système}
 
 % =========================================================
-\subsection{Nom du système}
+\subsection{Présentation du système}
 
 \textbf{College Routine} est une application intelligente qui aide l'utilisateur à organiser ses journées, ses cours, ses sessions d'étude, ses entraînements physiques, sa récupération et ses objectifs personnels.
 
@@ -502,8 +504,6 @@ Les acteurs secondaires sont :
 
 % =========================================================
 \subsection{Modèle conceptuel du domaine}
-
-Le modèle conceptuel représente les concepts importants du domaine sans imposer de choix d'implémentation. Il permet d'identifier les objets métiers, leurs attributs principaux et leurs relations.
 
 Le système repose sur un utilisateur qui possède des objectifs, suit des cours, importe des plans de cours, gère des échéances, planifie des tâches, réalise des sessions d'étude et des sessions fitness, puis reçoit des recommandations personnalisées.
 
@@ -556,32 +556,25 @@ Les cas d'utilisation principaux sont :
 \subsection{Cas d'utilisation détaillés}
 
 \subsubsection{UC-01 : Générer un planning quotidien}
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|p{0.28\linewidth}|p{0.62\linewidth}|}
-        \hline
-        Acteur principal & Utilisateur étudiant. \\ \hline
-        Acteurs secondaires & Apple Health / Zepp, Google Calendar, Service IA, Base scientifique. \\ \hline
-        Préconditions &
-        \begin{minipage}[t]{0.6\linewidth}
-            \begin{itemize}[leftmargin=*]
-                \item L'utilisateur possède un profil configuré.
-                \item L'utilisateur a défini au moins un objectif académique, physique ou personnel.
-                \item Le système possède au moins une source de tâches, cours ou échéances.
-            \end{itemize}
-        \end{minipage} \\ \hline
-    \end{tabular}
-    \caption{Cas d'utilisation UC-01}
-    \label{tab:uc-01}
-\end{table}
+\begin{longtable}{|p{0.28\linewidth}|p{0.62\linewidth}|}
 
+\hline
+Acteur principal & Utilisateur étudiant. \\ \hline
 
+Acteurs secondaires & Apple Health / Zepp, Google Calendar, Service IA, Base scientifique. \\ \hline
 
-\paragraph{Déclencheur}
-L'utilisateur demande la génération du planning de la journée.
+Préconditions &
+\begin{itemize}[leftmargin=*]
+    \item L'utilisateur possède un profil configuré.
+    \item L'utilisateur a défini au moins un objectif académique, physique ou personnel.
+    \item Le système possède au moins une source de tâches, cours ou échéances.
+\end{itemize}
+\\ \hline
 
-\paragraph{Scénario principal}
-\begin{enumerate}
+Déclencheur & L'utilisateur demande la génération du planning de la journée. \\ \hline
+
+Scénario principal &
+\begin{enumerate}[leftmargin=*]
     \item L'utilisateur ouvre le dashboard.
     \item Le système récupère les cours, tâches, échéances et contraintes du jour.
     \item Le système synchronise les données santé disponibles.
@@ -595,32 +588,38 @@ L'utilisateur demande la génération du planning de la journée.
     \item Le système produit des recommandations explicables.
     \item L'utilisateur consulte le planning.
 \end{enumerate}
+\\ \hline
 
-\paragraph{Postconditions}
-\begin{itemize}
+Postconditions &
+\begin{itemize}[leftmargin=*]
     \item Un planning quotidien est créé.
     \item Les recommandations sont associées aux blocs de temps.
     \item Le planning peut être modifié par l'utilisateur.
 \end{itemize}
+\\ \hline
 
-\paragraph{Exceptions}
-\begin{itemize}
+Exceptions &
+\begin{itemize}[leftmargin=*]
     \item Si les données santé ne sont pas disponibles, le système utilise les données déclarées manuellement ou les valeurs précédentes.
     \item Si le planning est trop chargé, le système signale un risque de surcharge.
     \item Si deux activités sont incompatibles, le système propose une alternative.
 \end{itemize}
+\\ \hline
+\caption{Cas d'utilisation UC-01}
+\label{tab:uc-01} 
+\end{longtable}
 
 % ---------------------------------------------------------
 \subsubsection{UC-02 : Créer une session d'étude}
 
-\paragraph{Acteur principal}
-Utilisateur étudiant.
+\begin{longtable}{|p{0.28\linewidth}|p{0.62\linewidth}|}
+\hline
+Acteur principal & Utilisateur étudiant. \\ \hline
 
-\paragraph{Préconditions}
-L'utilisateur possède au moins un cours.
+Préconditions & L'utilisateur possède au moins un cours. \\ \hline
 
-\paragraph{Scénario principal}
-\begin{enumerate}
+Scénario principal &
+\begin{enumerate}[leftmargin=*]
     \item L'utilisateur sélectionne un cours.
     \item Le système affiche les échéances et objectifs associés.
     \item L'utilisateur choisit le type de session ou demande une recommandation.
@@ -629,9 +628,10 @@ L'utilisateur possède au moins un cours.
     \item L'utilisateur confirme la session.
     \item Le système ajoute la session au planning.
 \end{enumerate}
+\\ \hline
 
-\paragraph{Méthodes possibles}
-\begin{itemize}
+Méthodes possibles &
+\begin{itemize}[leftmargin=*]
     \item active recall;
     \item practice testing;
     \item spaced repetition;
@@ -640,18 +640,23 @@ L'utilisateur possède au moins un cours.
     \item exercices;
     \item Pomodoro.
 \end{itemize}
+\\ \hline
+
+\caption{Cas d'utilisation UC-02}
+\label{tab:uc-02}
+\end{longtable}
 
 % ---------------------------------------------------------
 \subsubsection{UC-03 : Créer une session fitness}
 
-\paragraph{Acteur principal}
-Utilisateur étudiant.
+\begin{longtable}{|p{0.28\linewidth}|p{0.62\linewidth}|}
+\hline
+Acteur principal & Utilisateur étudiant. \\ \hline
 
-\paragraph{Préconditions}
-L'utilisateur possède un objectif physique.
+Préconditions & L'utilisateur possède un objectif physique. \\ \hline
 
-\paragraph{Scénario principal}
-\begin{enumerate}
+Scénario principal &
+\begin{enumerate}[leftmargin=*]
     \item L'utilisateur demande une séance gym.
     \item Le système consulte les objectifs physiques.
     \item Le système consulte le score de récupération.
@@ -660,18 +665,23 @@ L'utilisateur possède un objectif physique.
     \item L'utilisateur confirme la séance.
     \item Le système ajoute la séance au planning.
 \end{enumerate}
+\\ \hline
 
-\paragraph{Exceptions}
-Si la récupération est faible, le système recommande une séance légère ou une récupération active.
+Exceptions & Si la récupération est faible, le système recommande une séance légère ou une récupération active. \\ \hline
+
+\caption{Cas d'utilisation UC-03}
+\label{tab:uc-03}
+\end{longtable}
 
 % ---------------------------------------------------------
 \subsubsection{UC-04 : Recevoir une recommandation explicable}
 
-\paragraph{Acteur principal}
-Utilisateur étudiant.
+\begin{longtable}{|p{0.28\linewidth}|p{0.62\linewidth}|}
+\hline
+Acteur principal & Utilisateur étudiant. \\ \hline
 
-\paragraph{Scénario principal}
-\begin{enumerate}
+Scénario principal &
+\begin{enumerate}[leftmargin=*]
     \item Le système détecte une situation pertinente.
     \item Le système applique les règles scientifiques.
     \item Le système génère une recommandation.
@@ -679,6 +689,11 @@ Utilisateur étudiant.
     \item L'utilisateur consulte la recommandation.
     \item L'utilisateur peut accepter, ignorer ou modifier la recommandation.
 \end{enumerate}
+\\ \hline
+
+\caption{Cas d'utilisation UC-04}
+\label{tab:uc-04}
+\end{longtable}
 
 % =========================================================
 \subsection{Diagramme de séquence système}
