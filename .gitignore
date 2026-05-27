@@ -33,3 +33,6 @@ Desktop.ini
 # Temporary files
 *.tmp
 *.temp
+
+# PlantUML extension export output
+out/

@@ -16,6 +16,8 @@
 \usepackage{longtable}
 \usepackage{array}
 
+\graphicspath{{docs/assets/diagrams/}{../assets/diagrams/}}
+
 \hypersetup{
     colorlinks=true,
     linkcolor=blue
@@ -27,6 +29,19 @@
             \centering Image manquante : \texttt{#1}%
         }%
     }%
+}
+
+\newcommand{\diagramfigure}[4]{%
+    \begin{figure}[H]
+        \centering
+        \IfFileExists{#1}{%
+            \includegraphics[width=#2]{#1}%
+        }{%
+            \missingfigure{#1}%
+        }
+        \caption{#3}
+        \label{#4}
+    \end{figure}
 }
 
 \setstretch{1.2}
@@ -510,16 +525,7 @@ Le système repose sur un utilisateur qui possède des objectifs, suit des cours
 Le système utilise également des données de santé afin d'estimer un état cognitif et un score de récupération. Ces informations influencent la génération du planning quotidien.
 
 
-\begin{figure}[H]
-    \centering
-    \IfFileExists{model-conceptuel.jpeg}{%
-        \includegraphics[width=\linewidth]{model-conceptuel.jpeg}%
-    }{%
-        \missingfigure{model-conceptuel.jpeg}%
-    }
-    \caption{Modèle conceptuel - College Routine}
-    \label{fig:model-conceptuel}
-\end{figure}
+\diagramfigure{conceptual-model.png}{\linewidth}{Modèle conceptuel - College Routine}{fig:model-conceptuel}
 % =========================================================
 \subsection{Diagramme de cas d'utilisation}
 
@@ -542,16 +548,7 @@ Les cas d'utilisation principaux sont :
     \item suivre la progression académique;
     \item suivre la progression physique.
 \end{itemize}
-\begin{figure}[H]
-    \centering
-    \IfFileExists{use-case.png}{%
-        \includegraphics[width=0.6\linewidth]{use-case.png}%
-    }{%
-        \missingfigure{use-case.png}%
-    }
-    \caption{Diagramme de cas d'utilisation - College Routine}
-    \label{fig:use-case}
-\end{figure}
+\diagramfigure{use-case.png}{0.85\linewidth}{Diagramme de cas d'utilisation - College Routine}{fig:use-case}
 % =========================================================
 \subsection{Cas d'utilisation détaillés}
 
@@ -700,35 +697,9 @@ Scénario principal &
 
 Le diagramme de séquence système présente les interactions entre l'acteur et le système, sans détailler les objets internes.
 
-\subsubsection{Code PlantUML du SSD : Générer un planning quotidien}
+\subsubsection{SSD : Générer un planning quotidien}
 
-\begin{verbatim}
-@startuml
-title SSD - Générer un planning quotidien - College Routine
-
-actor "Utilisateur étudiant" as User
-participant "Système College Routine" as System
-
-User -> System : ouvrirDashboard()
-System --> User : afficherRésuméJournee()
-
-User -> System : demanderGenerationPlanning(date)
-System -> System : récupérerCoursEtEcheances(date)
-System -> System : récupérerTaches(date)
-System -> System : synchroniserDonnéesSanté()
-System -> System : calculerEtatCognitif()
-System -> System : calculerScoreRecuperation()
-System -> System : prioriserActivites()
-System -> System : générerBlocsTemps()
-System -> System : générerRecommandations()
-System --> User : afficherPlanningQuotidien(planning, recommandations)
-
-User -> System : confirmerPlanning()
-System -> System : sauvegarderPlanning()
-System --> User : afficherConfirmation()
-
-@enduml
-\end{verbatim}
+\diagramfigure{ssd-generate-daily-planner.png}{0.95\linewidth}{SSD - Générer un planning quotidien - College Routine}{fig:ssd-generate-daily-planner}
 
 % =========================================================
 \subsection{Diagrammes de séquence de conception}
@@ -737,129 +708,17 @@ Les diagrammes de séquence de conception montrent comment les objets internes c
 
 \subsubsection{Générer un planning quotidien}
 
-\begin{verbatim}
-@startuml
-title Diagramme de séquence - Générer un planning quotidien - College Routine
-
-actor "Utilisateur" as User
-boundary "DashboardView" as View
-control "PlanningFacade" as Facade
-control "AcademicService" as Academic
-control "HealthService" as Health
-control "PlanningEngine" as Planner
-control "RecommendationEngine" as Reco
-entity "PlanningContext" as Context
-entity "DailyPlan" as Plan
-
-User -> View : cliquerGenererPlanning(date)
-View -> Facade : generateDailyPlan(userId, date)
-
-Facade -> Academic : getAcademicData(userId, date)
-Academic --> Facade : courses, tasks, deadlines
-
-Facade -> Health : syncHealthData(userId)
-Health --> Facade : healthData, recoveryScore, cognitiveState
-
-Facade -> Context : create(user, courses, tasks, deadlines, healthData)
-Context --> Facade : context
-
-Facade -> Planner : generateDailyPlan(context)
-Planner -> Planner : prioritizeTasks()
-Planner -> Planner : allocateStudySessions()
-Planner -> Planner : allocateFitnessSessions()
-Planner -> Planner : insertBreaksAndRecovery()
-Planner --> Facade : dailyPlan
-
-Facade -> Reco : generateRecommendations(context, dailyPlan)
-Reco -> Reco : applyScientificRules()
-Reco -> Reco : generateExplanations()
-Reco --> Facade : recommendations
-
-Facade -> Plan : attachRecommendations(recommendations)
-Plan --> Facade : updatedPlan
-
-Facade --> View : dailyPlan
-View --> User : afficherPlanning(dailyPlan)
-
-@enduml
-\end{verbatim}
+\diagramfigure{sequence-generate-daily-planner.png}{0.95\linewidth}{Diagramme de séquence - Générer un planning quotidien - College Routine}{fig:sequence-generate-daily-planner}
 
 % ---------------------------------------------------------
 \subsubsection{Créer une session d'étude}
 
-\begin{verbatim}
-@startuml
-title Diagramme de séquence - Créer une session d'étude - College Routine
-
-actor "Utilisateur" as User
-boundary "StudySessionView" as View
-control "PlanningFacade" as Facade
-control "AcademicService" as Academic
-control "HealthService" as Health
-control "RecommendationEngine" as Reco
-control "StudySessionFactory" as Factory
-entity "StudySession" as Session
-entity "Course" as Course
-
-User -> View : sélectionnerCours(courseId)
-View -> Facade : getCourseContext(courseId)
-
-Facade -> Academic : getCourse(courseId)
-Academic --> Facade : course
-
-Facade -> Health : getLatestCognitiveState(userId)
-Health --> Facade : cognitiveState
-
-Facade -> Reco : recommendStudyStrategy(course, cognitiveState)
-Reco --> Facade : studyStrategy
-
-Facade -> Factory : createStudySession(course, studyStrategy, cognitiveState)
-Factory --> Facade : studySession
-
-Facade --> View : afficherSessionProposée(studySession)
-User -> View : confirmerSession()
-View -> Facade : saveSession(studySession)
-Facade --> View : confirmation()
-
-@enduml
-\end{verbatim}
+\diagramfigure{sequence-create-study-session.png}{0.95\linewidth}{Diagramme de séquence - Créer une session d'étude - College Routine}{fig:sequence-create-study-session}
 
 % ---------------------------------------------------------
 \subsubsection{Adapter une session fitness}
 
-\begin{verbatim}
-@startuml
-title Diagramme de séquence - Adapter une séance fitness - College Routine
-
-actor "Utilisateur" as User
-boundary "FitnessView" as View
-control "PlanningFacade" as Facade
-control "HealthService" as Health
-control "FitnessService" as Fitness
-entity "RecoveryScore" as Recovery
-entity "FitnessSession" as Session
-
-User -> View : demanderSeanceFitness()
-View -> Facade : createFitnessSession(userId)
-
-Facade -> Health : getLatestRecoveryScore(userId)
-Health --> Facade : recoveryScore
-
-Facade -> Fitness : createFitnessSession(goal, recoveryScore)
-Fitness -> Fitness : choisirIntensité()
-Fitness -> Fitness : choisirTypeEntrainement()
-Fitness --> Facade : fitnessSession
-
-Facade --> View : afficherSeanceProposée(fitnessSession)
-
-alt récupération faible
-  View --> User : proposerSéanceLégèreOuRepos()
-else récupération normale
-  View --> User : proposerSéanceNormale()
-end
-
-@enduml
-\end{verbatim}
+\diagramfigure{sequence-adapt-fitness-session.png}{0.95\linewidth}{Diagramme de séquence - Adapter une séance fitness - College Routine}{fig:sequence-adapt-fitness-session}
 
 % =========================================================
 \subsection{Assignation des responsabilités}
@@ -991,61 +850,13 @@ Le patron Commande peut être utilisé pour rendre certaines actions annulables 
 
 Le diagramme d'activité suivant décrit le processus général de génération du planning quotidien.
 
-\subsubsection{Code PlantUML du diagramme d'activité}
-
-\begin{verbatim}
-@startuml
-title Diagramme d'activité - Génération du planning quotidien - College Routine
-
-start
-
-:Charger profil utilisateur;
-:Charger objectifs;
-:Charger cours, tâches et échéances;
-:Synchroniser données santé;
-
-:Calculer score de récupération;
-:Calculer état cognitif;
-:Estimer charge académique;
-
-if (Surcharge détectée ?) then (oui)
-  :Réduire blocs non critiques;
-  :Ajouter pauses;
-  :Générer alerte de surcharge;
-else (non)
-  :Continuer planification normale;
-endif
-
-:Prioriser les tâches;
-:Choisir sessions d'étude;
-:Choisir session fitness;
-:Créer blocs de temps;
-:Ajouter repas, pauses et récupération;
-
-:Appliquer règles scientifiques;
-:Générer recommandations;
-:Afficher planning;
-
-stop
-
-@enduml
-\end{verbatim}
+\diagramfigure{activity-daily-planner-generation.png}{0.85\linewidth}{Diagramme d'activité - Génération du planning quotidien - College Routine}{fig:activity-daily-planner-generation}
 
 % =========================================================
 \subsection{Diagramme de classes de conception}
 
 Le diagramme de classes de conception présente une première architecture logicielle de \textbf{College Routine}. Il regroupe les classes selon leurs responsabilités principales.
 
-\subsubsection{Code PlantUML du diagramme de classes}
-\begin{figure}
-    \centering
-    \IfFileExists{Ca.jpeg}{%
-        \includegraphics[width=0.5\linewidth]{Ca.jpeg}%
-    }{%
-        \missingfigure{Ca.jpeg}%
-    }
-    \caption{Diagramme de classes de conception}
-    \label{fig:classe-conception}
-\end{figure}
+\diagramfigure{class-diagram.png}{\linewidth}{Diagramme de classes de conception}{fig:classe-conception}
 
 \end{document}

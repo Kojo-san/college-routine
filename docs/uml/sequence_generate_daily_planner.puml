@@ -1,0 +1,44 @@
+@startuml
+title Diagramme de séquence - Générer un planning quotidien - College Routine
+
+actor "Utilisateur" as User
+boundary "DashboardView" as View
+control "PlanningFacade" as Facade
+control "AcademicService" as Academic
+control "HealthService" as Health
+control "PlanningEngine" as Planner
+control "RecommendationEngine" as Reco
+entity "PlanningContext" as Context
+entity "DailyPlan" as Plan
+
+User -> View : cliquerGenererPlanning(date)
+View -> Facade : generateDailyPlan(userId, date)
+
+Facade -> Academic : getAcademicData(userId, date)
+Academic --> Facade : courses, tasks, deadlines
+
+Facade -> Health : syncHealthData(userId)
+Health --> Facade : healthData, recoveryScore, cognitiveState
+
+Facade -> Context : create(user, courses, tasks, deadlines, healthData)
+Context --> Facade : context
+
+Facade -> Planner : generateDailyPlan(context)
+Planner -> Planner : prioritizeTasks()
+Planner -> Planner : allocateStudySessions()
+Planner -> Planner : allocateFitnessSessions()
+Planner -> Planner : insertBreaksAndRecovery()
+Planner --> Facade : dailyPlan
+
+Facade -> Reco : generateRecommendations(context, dailyPlan)
+Reco -> Reco : applyScientificRules()
+Reco -> Reco : generateExplanations()
+Reco --> Facade : recommendations
+
+Facade -> Plan : attachRecommendations(recommendations)
+Plan --> Facade : updatedPlan
+
+Facade --> View : dailyPlan
+View --> User : afficherPlanning(dailyPlan)
+
+@enduml
