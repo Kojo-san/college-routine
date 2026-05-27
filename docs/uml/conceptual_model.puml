@@ -1,0 +1,169 @@
+@startuml
+title Modèle conceptuel - College Routine
+
+hide methods
+skinparam classAttributeIconSize 0
+
+class Utilisateur {
+  nom
+  courriel
+  profil
+}
+
+class Objectif {
+  titre
+  description
+  dateCible
+  priorité
+}
+
+class ObjectifAcademique {
+  moyenneCible
+  noteCible
+}
+
+class ObjectifPhysique {
+  poidsCible
+  objectifMusculaire
+  objectifCardio
+}
+
+class Cours {
+  sigle
+  nom
+  difficulté
+  chargeHebdomadaireEstimée
+}
+
+class PlanCours {
+  fichierSource
+  sujets
+  évaluations
+  calendrier
+}
+
+class Echeance {
+  titre
+  dateRemise
+  pondération
+  priorité
+  statut
+}
+
+class Tache {
+  titre
+  description
+  duréeEstimée
+  priorité
+  statut
+}
+
+class SessionEtude {
+  objectif
+  durée
+  intensitéCognitive
+  méthodeEtude
+  statut
+}
+
+class SessionFitness {
+  typeEntrainement
+  groupeMusculaire
+  intensité
+  durée
+  statut
+}
+
+class DonneesSante {
+  date
+}
+
+class Sommeil {
+  durée
+  qualité
+  sommeilProfond
+  réveils
+}
+
+class ActivitePhysique {
+  pas
+  calories
+  minutesActives
+}
+
+class FrequenceCardiaque {
+  repos
+  moyenne
+  maximale
+}
+
+class EtatCognitif {
+  concentration
+  fatigueMentale
+  stress
+  motivation
+}
+
+class ScoreRecuperation {
+  score
+  fatiguePhysique
+  detteSommeil
+}
+
+class PlanningQuotidien {
+  date
+  scoreJournee
+}
+
+class BlocTemps {
+  heureDébut
+  heureFin
+  typeActivité
+  priorité
+}
+
+class Recommandation {
+  type
+  message
+  explication
+  confiance
+}
+
+class SourceScientifique {
+  titre
+  auteur
+  année
+  résumé
+}
+
+Utilisateur "1" -- "0..*" Objectif
+Objectif <|-- ObjectifAcademique
+Objectif <|-- ObjectifPhysique
+
+Utilisateur "1" -- "0..*" Cours
+Cours "1" -- "0..1" PlanCours
+Cours "1" -- "0..*" Echeance
+Cours "1" -- "0..*" Tache
+
+Utilisateur "1" -- "0..*" SessionEtude
+Utilisateur "1" -- "0..*" SessionFitness
+SessionEtude "0..*" -- "1" Cours
+
+Utilisateur "1" -- "0..*" DonneesSante
+DonneesSante "1" -- "1" Sommeil
+DonneesSante "1" -- "1" ActivitePhysique
+DonneesSante "1" -- "1" FrequenceCardiaque
+
+DonneesSante "1" -- "1" ScoreRecuperation
+DonneesSante "1" -- "1" EtatCognitif
+
+Utilisateur "1" -- "0..*" PlanningQuotidien
+PlanningQuotidien "1" -- "1..*" BlocTemps
+BlocTemps "0..1" -- "0..1" SessionEtude
+BlocTemps "0..1" -- "0..1" SessionFitness
+BlocTemps "0..1" -- "0..1" Tache
+
+PlanningQuotidien "1" -- "0..*" Recommandation
+Recommandation "0..*" -- "0..*" SourceScientifique
+
+@enduml

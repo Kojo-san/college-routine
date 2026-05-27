@@ -1,0 +1,31 @@
+@startuml
+title Diagramme de séquence - Adapter une séance fitness - College Routine
+
+actor "Utilisateur" as User
+boundary "FitnessView" as View
+control "PlanningFacade" as Facade
+control "HealthService" as Health
+control "FitnessService" as Fitness
+entity "RecoveryScore" as Recovery
+entity "FitnessSession" as Session
+
+User -> View : demanderSeanceFitness()
+View -> Facade : createFitnessSession(userId)
+
+Facade -> Health : getLatestRecoveryScore(userId)
+Health --> Facade : recoveryScore
+
+Facade -> Fitness : createFitnessSession(goal, recoveryScore)
+Fitness -> Fitness : choisirIntensité()
+Fitness -> Fitness : choisirTypeEntrainement()
+Fitness --> Facade : fitnessSession
+
+Facade --> View : afficherSeanceProposée(fitnessSession)
+
+alt récupération faible
+  View --> User : proposerSéanceLégèreOuRepos()
+else récupération normale
+  View --> User : proposerSéanceNormale()
+end
+
+@enduml

@@ -1,0 +1,338 @@
+@startuml
+title Diagramme de classes - College Routine
+
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+package "Utilisateur" {
+
+  class User {
+    -id : string
+    -name : string
+    -email : string
+    +addGoal(goal : Goal)
+    +updatePreferences(preferences : PlanningPreferences)
+  }
+
+  abstract class Goal {
+    -id : string
+    -title : string
+    -description : string
+    -targetDate : Date
+    -priority : Priority
+    +isCompleted() : boolean
+  }
+
+  class AcademicGoal {
+    -targetGpa : double
+    -targetGrade : string
+  }
+
+  class FitnessGoal {
+    -targetWeight : double
+    -targetBodyFat : double
+    -targetStrength : string
+  }
+
+  class PlanningPreferences {
+    -preferredWakeTime : Time
+    -preferredSleepTime : Time
+    -preferredGymTime : Time
+    -maxDailyStudyHours : double
+  }
+
+  User "1" o-- "0..*" Goal
+  Goal <|-- AcademicGoal
+  Goal <|-- FitnessGoal
+  User "1" o-- "1" PlanningPreferences
+}
+
+package "Académique" {
+
+  class Course {
+    -id : string
+    -code : string
+    -name : string
+    -difficultyLevel : int
+    -estimatedWeeklyWorkload : double
+    +estimateWorkload() : double
+  }
+
+  class CoursePlan {
+    -id : string
+    -sourceFileName : string
+    -topics : List<String>
+    -evaluationRules : List<String>
+    +extractDeadlines() : List<Deadline>
+  }
+
+  class Deadline {
+    -id : string
+    -title : string
+    -dueDate : DateTime
+    -weight : double
+    -priority : Priority
+    +daysRemaining() : int
+  }
+
+  class Task {
+    -id : string
+    -title : string
+    -estimatedDurationMinutes : int
+    -priority : Priority
+    -completed : boolean
+    +markCompleted()
+  }
+
+  Course "1" o-- "0..1" CoursePlan
+  Course "1" o-- "0..*" Deadline
+  Course "1" o-- "0..*" Task
+}
+
+package "Sessions" {
+
+  abstract class Session {
+    -id : string
+    -title : string
+    -startTime : DateTime
+    -endTime : DateTime
+    -status : SessionStatus
+    +start()
+    +complete()
+    +cancel()
+  }
+
+  class StudySession {
+    -intensity : CognitiveIntensity
+    -expectedOutcome : string
+    +applyStrategy()
+  }
+
+  class FitnessSession {
+    -workoutType : string
+    -muscleGroups : List<String>
+    -intensity : int
+    -durationMinutes : int
+    +adaptToRecovery(score : RecoveryScore)
+  }
+
+  class RecoverySession {
+    -recoveryType : string
+    -durationMinutes : int
+  }
+
+  interface StudyStrategy {
+    +getName() : string
+    +estimateCognitiveLoad() : int
+    +generateInstructions(session : StudySession) : string
+  }
+
+  class ActiveRecallStrategy
+  class SpacedRepetitionStrategy
+  class PracticeTestingStrategy
+  class MindMapStrategy
+  class PomodoroStrategy
+
+  Session <|-- StudySession
+  Session <|-- FitnessSession
+  Session <|-- RecoverySession
+
+  StudyStrategy <|.. ActiveRecallStrategy
+  StudyStrategy <|.. SpacedRepetitionStrategy
+  StudyStrategy <|.. PracticeTestingStrategy
+  StudyStrategy <|.. MindMapStrategy
+  StudyStrategy <|.. PomodoroStrategy
+
+  StudySession "1" --> "1" StudyStrategy
+}
+
+package "Santé" {
+
+  class HealthData {
+    -date : Date
+    +calculateRecoveryScore() : RecoveryScore
+  }
+
+  class SleepData {
+    -sleepDurationHours : double
+    -sleepEfficiency : double
+    -deepSleepMinutes : int
+  }
+
+  class ActivityData {
+    -steps : int
+    -activeCalories : int
+    -workoutMinutes : int
+  }
+
+  class HeartRateData {
+    -restingHeartRate : int
+    -averageHeartRate : int
+  }
+
+  class RecoveryScore {
+    -value : int
+    -physicalFatigue : int
+    -cognitiveFatigue : int
+    -sleepDebt : double
+    +isLow() : boolean
+  }
+
+  class CognitiveState {
+    -focusLevel : int
+    -mentalFatigue : int
+    -stressLevel : int
+    -motivationLevel : int
+    +isOverloaded() : boolean
+  }
+
+  HealthData "1" o-- "1" SleepData
+  HealthData "1" o-- "1" ActivityData
+  HealthData "1" o-- "1" HeartRateData
+  HealthData "1" --> "1" RecoveryScore
+  HealthData "1" --> "1" CognitiveState
+}
+
+package "Planning" {
+
+  class DailyPlan {
+    -id : string
+    -date : Date
+    -timeBlocks : List<TimeBlock>
+    +addTimeBlock(block : TimeBlock)
+    +removeTimeBlock(blockId : string)
+    +reorderBlocks()
+  }
+
+  class TimeBlock {
+    -id : string
+    -startTime : DateTime
+    -endTime : DateTime
+    -label : string
+    -priority : Priority
+    +overlaps(other : TimeBlock) : boolean
+  }
+
+  DailyPlan "1" o-- "1..*" TimeBlock
+  TimeBlock "0..1" --> "0..1" Session
+}
+
+package "Recommandations" {
+
+  class Recommendation {
+    -id : string
+    -type : RecommendationType
+    -message : string
+    -explanation : string
+    -confidenceScore : double
+  }
+
+  class ScientificRule {
+    -id : string
+    -name : string
+    -condition : string
+    -recommendationTemplate : string
+    +appliesTo(context : PlanningContext) : boolean
+    +generateRecommendation(context : PlanningContext) : Recommendation
+  }
+
+  class EvidenceSource {
+    -id : string
+    -title : string
+    -authors : string
+    -year : int
+    -summary : string
+  }
+
+  Recommendation "0..*" --> "0..*" ScientificRule
+  ScientificRule "1" --> "1" EvidenceSource
+}
+
+package "Services" {
+
+  class PlanningContext {
+    -user : User
+    -courses : List<Course>
+    -tasks : List<Task>
+    -healthData : HealthData
+    -cognitiveState : CognitiveState
+    -date : Date
+  }
+
+  class PlanningFacade {
+    +generateDailyPlan(user : User, date : Date) : DailyPlan
+    +syncAndReplan(user : User, date : Date) : DailyPlan
+  }
+
+  class PlanningEngine {
+    +generateDailyPlan(context : PlanningContext) : DailyPlan
+    +prioritizeTasks(tasks : List<Task>) : List<Task>
+    +resolveConflicts(plan : DailyPlan) : DailyPlan
+  }
+
+  class RecommendationEngine {
+    +generateRecommendations(context : PlanningContext) : List<Recommendation>
+    +explain(recommendation : Recommendation) : string
+  }
+
+  class AcademicService {
+    +importCoursePlan(file : File) : CoursePlan
+    +estimateCourseWorkload(course : Course) : double
+  }
+
+  class HealthService {
+    +syncHealthData(user : User) : HealthData
+    +calculateCognitiveState(data : HealthData) : CognitiveState
+  }
+
+  class FitnessService {
+    +createFitnessSession(goal : FitnessGoal, score : RecoveryScore) : FitnessSession
+  }
+
+  PlanningFacade --> PlanningEngine
+  PlanningFacade --> RecommendationEngine
+  PlanningFacade --> AcademicService
+  PlanningFacade --> HealthService
+  PlanningFacade --> FitnessService
+  PlanningEngine --> PlanningContext
+  RecommendationEngine --> ScientificRule
+}
+
+User "1" -- "0..*" Course
+User "1" -- "0..*" DailyPlan
+User "1" -- "0..*" HealthData
+StudySession "1" --> "1" Course
+DailyPlan "1" -- "0..*" Recommendation
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum SessionStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  MISSED
+  CANCELLED
+}
+
+enum CognitiveIntensity {
+  LOW
+  MEDIUM
+  HIGH
+  DEEP_WORK
+}
+
+enum RecommendationType {
+  STUDY
+  FITNESS
+  RECOVERY
+  SLEEP
+  PLANNING
+  STRESS
+}
+
+@enduml

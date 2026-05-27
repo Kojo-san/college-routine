@@ -1,0 +1,35 @@
+@startuml
+title Diagramme d'activité - Génération du planning quotidien - College Routine
+
+start
+
+:Charger profil utilisateur;
+:Charger objectifs;
+:Charger cours, tâches et échéances;
+:Synchroniser données santé;
+
+:Calculer score de récupération;
+:Calculer état cognitif;
+:Estimer charge académique;
+
+if (Surcharge détectée ?) then (oui)
+  :Réduire blocs non critiques;
+  :Ajouter pauses;
+  :Générer alerte de surcharge;
+else (non)
+  :Continuer planification normale;
+endif
+
+:Prioriser les tâches;
+:Choisir sessions d'étude;
+:Choisir session fitness;
+:Créer blocs de temps;
+:Ajouter repas, pauses et récupération;
+
+:Appliquer règles scientifiques;
+:Générer recommandations;
+:Afficher planning;
+
+stop
+
+@enduml

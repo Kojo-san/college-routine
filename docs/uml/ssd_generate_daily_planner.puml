@@ -1,0 +1,25 @@
+@startuml
+title SSD - Générer un planning quotidien - College Routine
+
+actor "Utilisateur étudiant" as User
+participant "Système College Routine" as System
+
+User -> System : ouvrirDashboard()
+System --> User : afficherRésuméJournee()
+
+User -> System : demanderGenerationPlanning(date)
+System -> System : récupérerCoursEtEcheances(date)
+System -> System : récupérerTaches(date)
+System -> System : synchroniserDonnéesSanté()
+System -> System : calculerEtatCognitif()
+System -> System : calculerScoreRecuperation()
+System -> System : prioriserActivites()
+System -> System : générerBlocsTemps()
+System -> System : générerRecommandations()
+System --> User : afficherPlanningQuotidien(planning, recommandations)
+
+User -> System : confirmerPlanning()
+System -> System : sauvegarderPlanning()
+System --> User : afficherConfirmation()
+
+@enduml

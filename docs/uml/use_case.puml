@@ -1,0 +1,61 @@
+@startuml
+title Diagramme de cas d'utilisation - College Routine
+
+left to right direction
+
+actor "Utilisateur étudiant" as User
+actor "Apple Health / Zepp" as Health
+actor "Google Calendar" as Calendar
+actor "Service IA" as AI
+actor "Base scientifique" as Science
+
+rectangle "College Routine" {
+
+  usecase "Configurer son profil" as UC1
+  usecase "Définir ses objectifs" as UC2
+  usecase "Importer un plan de cours" as UC3
+  usecase "Gérer ses cours" as UC4
+  usecase "Gérer ses échéances" as UC5
+  usecase "Créer une session d'étude" as UC6
+  usecase "Créer une session fitness" as UC7
+  usecase "Synchroniser les données santé" as UC8
+  usecase "Générer un planning quotidien" as UC9
+  usecase "Réorganiser le planning" as UC10
+  usecase "Recevoir des recommandations" as UC11
+  usecase "Expliquer une recommandation" as UC12
+  usecase "Suivre la progression académique" as UC13
+  usecase "Suivre la progression physique" as UC14
+  usecase "Préparer un examen" as UC15
+  usecase "Détecter surcharge ou procrastination" as UC16
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+User --> UC9
+User --> UC10
+User --> UC11
+User --> UC12
+User --> UC13
+User --> UC14
+User --> UC15
+
+Health --> UC8
+Calendar --> UC9
+AI --> UC9
+AI --> UC11
+Science --> UC11
+Science --> UC12
+
+UC9 .> UC8 : <<include>>
+UC9 .> UC11 : <<include>>
+UC11 .> UC16 : <<include>>
+UC12 .> UC11 : <<extend>>
+UC15 .> UC6 : <<include>>
+UC15 .> UC11 : <<include>>
+
+@enduml
