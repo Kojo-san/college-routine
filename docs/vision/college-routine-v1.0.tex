@@ -26,7 +26,7 @@
 \newcommand{\missingfigure}[1]{%
     \fbox{%
         \parbox[c][0.25\textheight][c]{0.85\linewidth}{%
-            \centering Image manquante : \texttt{#1}%
+            \centering Image manquante : \texttt{\detokenize{#1}}%
         }%
     }%
 }
@@ -34,10 +34,14 @@
 \newcommand{\diagramfigure}[4]{%
     \begin{figure}[H]
         \centering
-        \IfFileExists{#1}{%
-            \includegraphics[width=#2]{#1}%
+        \IfFileExists{docs/assets/diagrams/#1}{%
+            \includegraphics[#2]{docs/assets/diagrams/#1}%
         }{%
-            \missingfigure{#1}%
+            \IfFileExists{../assets/diagrams/#1}{%
+                \includegraphics[#2]{../assets/diagrams/#1}%
+            }{%
+                \missingfigure{#1}%
+            }%
         }
         \caption{#3}
         \label{#4}
@@ -525,7 +529,7 @@ Le système repose sur un utilisateur qui possède des objectifs, suit des cours
 Le système utilise également des données de santé afin d'estimer un état cognitif et un score de récupération. Ces informations influencent la génération du planning quotidien.
 
 
-\diagramfigure{conceptual-model.png}{\linewidth}{Modèle conceptuel - College Routine}{fig:model-conceptuel}
+\diagramfigure{conceptual_model.png}{width=\linewidth,height=0.75\textheight,keepaspectratio}{Modèle conceptuel - College Routine}{fig:model-conceptuel}
 % =========================================================
 \subsection{Diagramme de cas d'utilisation}
 
@@ -548,7 +552,7 @@ Les cas d'utilisation principaux sont :
     \item suivre la progression académique;
     \item suivre la progression physique.
 \end{itemize}
-\diagramfigure{use-case.png}{0.85\linewidth}{Diagramme de cas d'utilisation - College Routine}{fig:use-case}
+\diagramfigure{use-case.png}{width=0.85\linewidth,height=0.75\textheight,keepaspectratio}{Diagramme de cas d'utilisation - College Routine}{fig:use-case}
 % =========================================================
 \subsection{Cas d'utilisation détaillés}
 
@@ -699,7 +703,7 @@ Le diagramme de séquence système présente les interactions entre l'acteur et 
 
 \subsubsection{SSD : Générer un planning quotidien}
 
-\diagramfigure{ssd-generate-daily-planner.png}{0.95\linewidth}{SSD - Générer un planning quotidien - College Routine}{fig:ssd-generate-daily-planner}
+\diagramfigure{ssd_generate_daily_planner.png}{width=0.95\linewidth,height=0.75\textheight,keepaspectratio}{SSD - Générer un planning quotidien - College Routine}{fig:ssd-generate-daily-planner}
 
 % =========================================================
 \subsection{Diagrammes de séquence de conception}
@@ -708,17 +712,17 @@ Les diagrammes de séquence de conception montrent comment les objets internes c
 
 \subsubsection{Générer un planning quotidien}
 
-\diagramfigure{sequence-generate-daily-planner.png}{0.95\linewidth}{Diagramme de séquence - Générer un planning quotidien - College Routine}{fig:sequence-generate-daily-planner}
+\diagramfigure{sequence_generate_daily_planner.png}{width=0.95\linewidth,height=0.75\textheight,keepaspectratio}{Diagramme de séquence - Générer un planning quotidien - College Routine}{fig:sequence-generate-daily-planner}
 
 % ---------------------------------------------------------
 \subsubsection{Créer une session d'étude}
 
-\diagramfigure{sequence-create-study-session.png}{0.95\linewidth}{Diagramme de séquence - Créer une session d'étude - College Routine}{fig:sequence-create-study-session}
+\diagramfigure{ssd_create_study_session.png}{width=0.95\linewidth,height=0.75\textheight,keepaspectratio}{Diagramme de séquence - Créer une session d'étude - College Routine}{fig:sequence-create-study-session}
 
 % ---------------------------------------------------------
 \subsubsection{Adapter une session fitness}
 
-\diagramfigure{sequence-adapt-fitness-session.png}{0.95\linewidth}{Diagramme de séquence - Adapter une séance fitness - College Routine}{fig:sequence-adapt-fitness-session}
+\diagramfigure{ssd_adapt_fitness_session.png}{width=0.95\linewidth,height=0.75\textheight,keepaspectratio}{Diagramme de séquence - Adapter une séance fitness - College Routine}{fig:sequence-adapt-fitness-session}
 
 % =========================================================
 \subsection{Assignation des responsabilités}
@@ -850,13 +854,13 @@ Le patron Commande peut être utilisé pour rendre certaines actions annulables 
 
 Le diagramme d'activité suivant décrit le processus général de génération du planning quotidien.
 
-\diagramfigure{activity-daily-planner-generation.png}{0.85\linewidth}{Diagramme d'activité - Génération du planning quotidien - College Routine}{fig:activity-daily-planner-generation}
+\diagramfigure{activity_diagram_daily_planner_generation.png}{width=0.85\linewidth,height=0.75\textheight,keepaspectratio}{Diagramme d'activité - Génération du planning quotidien - College Routine}{fig:activity-daily-planner-generation}
 
 % =========================================================
 \subsection{Diagramme de classes de conception}
 
 Le diagramme de classes de conception présente une première architecture logicielle de \textbf{College Routine}. Il regroupe les classes selon leurs responsabilités principales.
 
-\diagramfigure{class-diagram.png}{\linewidth}{Diagramme de classes de conception}{fig:classe-conception}
+\diagramfigure{class_diagram.png}{width=\linewidth,height=0.75\textheight,keepaspectratio}{Diagramme de classes de conception}{fig:classe-conception}
 
 \end{document}
